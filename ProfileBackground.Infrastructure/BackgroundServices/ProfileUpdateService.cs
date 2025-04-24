@@ -1,9 +1,9 @@
-﻿using ProfileBackground.Domain.Interfaces;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using ProfileBackground.Domain.Interfaces;
 
-namespace ProfileBackground.Domain.Services
+namespace ProfileBackground.Infrastructure.BackgroundServices
 {
     public class ProfileUpdateService : BackgroundService
     {

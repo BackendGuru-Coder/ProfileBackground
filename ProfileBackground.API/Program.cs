@@ -1,6 +1,7 @@
 using ProfileBackground.API.Swagger;
 using ProfileBackground.Domain.Interfaces;
 using ProfileBackground.Domain.Services;
+using ProfileBackground.Infrastructure.BackgroundServices;
 
 var builder = WebApplication.CreateBuilder(args);
 

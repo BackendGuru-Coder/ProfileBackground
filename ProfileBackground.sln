@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileBackground.Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileBackground.API", "ProfileBackground.API\ProfileBackground.API.csproj", "{B7891BF9-FE61-4874-AF8C-D536C95B0113}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileBackground.Infrastructure", "ProfileBackground.Infrastructure\ProfileBackground.Infrastructure.csproj", "{D8090EBB-4B01-4BAE-9E19-76B6C3BA3663}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B7891BF9-FE61-4874-AF8C-D536C95B0113}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7891BF9-FE61-4874-AF8C-D536C95B0113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7891BF9-FE61-4874-AF8C-D536C95B0113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8090EBB-4B01-4BAE-9E19-76B6C3BA3663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8090EBB-4B01-4BAE-9E19-76B6C3BA3663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8090EBB-4B01-4BAE-9E19-76B6C3BA3663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8090EBB-4B01-4BAE-9E19-76B6C3BA3663}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
