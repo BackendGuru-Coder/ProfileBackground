@@ -5,7 +5,7 @@ namespace ProfileBackground.Domain.Services
 {
     public class ProfileService : IProfileService
     {
-        private readonly Dictionary<string, ProfileParameter> _profiles = new();
+        private readonly Dictionary<string, ProfileParameter> _profiles = new(StringComparer.OrdinalIgnoreCase);
 
         public Dictionary<string, ProfileParameter> GetAll() => _profiles;
 
@@ -26,9 +26,16 @@ namespace ProfileBackground.Domain.Services
 
         public bool Validate(string profileName, string action)
         {
-            return _profiles.TryGetValue(profileName, out var profile) &&
-                   profile.Parameters.TryGetValue(action, out var value) &&
-                   value.Equals("true", StringComparison.OrdinalIgnoreCase);
+            if (_profiles.TryGetValue(profileName, out var profile))
+            {
+                var param = profile.Parameters
+                    .FirstOrDefault(p => string.Equals(p.Key, action, StringComparison.OrdinalIgnoreCase));
+
+                return !string.IsNullOrEmpty(param.Key) &&
+                       param.Value.Equals("true", StringComparison.OrdinalIgnoreCase);
+            }
+
+            return false;
         }
     }
 }

@@ -7,33 +7,41 @@ namespace ProfileBackground.Infrastructure.BackgroundServices
 {
     public class ProfileUpdateService : BackgroundService
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IServiceScopeFactory _scopeFactory;
         private readonly ILogger<ProfileUpdateService> _logger;
 
-        public ProfileUpdateService(IServiceProvider serviceProvider, ILogger<ProfileUpdateService> logger)
+        public ProfileUpdateService(IServiceScopeFactory scopeFactory, ILogger<ProfileUpdateService> logger)
         {
-            _serviceProvider = serviceProvider;
+            _scopeFactory = scopeFactory;
             _logger = logger;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            using var scope = _serviceProvider.CreateScope();
-            var _profileService = scope.ServiceProvider.GetRequiredService<IProfileService>();
-
             while (!stoppingToken.IsCancellationRequested)
             {
-                var profiles = _profileService.GetAll();
+                using var scope = _scopeFactory.CreateScope();
+                var _profileService = scope.ServiceProvider.GetRequiredService<IProfileService>();
 
-                foreach (var profile in profiles.Values)
+                try
                 {
-                    foreach (var key in profile.Parameters.Keys.ToList())
+                    var profiles = _profileService.GetAll();
+
+                    foreach (var profile in profiles.Values)
                     {
-                        profile.Parameters[key] = profile.Parameters[key] == "true" ? "false" : "true";
+                        foreach (var key in profile.Parameters.Keys.ToList())
+                        {
+                            profile.Parameters[key] = profile.Parameters[key] == "true" ? "false" : "true";
+                        }
                     }
+
+                    _logger.LogInformation("Perfis atualizados.");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Erro ao atualizar perfis.");
                 }
 
-                _logger.LogInformation("Perfis atualizados.");
                 await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
             }
         }
